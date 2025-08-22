@@ -2,7 +2,7 @@ package utils;
 
 import order.Order;
 import book.Book;
-import customer.Customer;
+import user.User;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -91,10 +91,10 @@ public class SearchAlgorithms {
         return null;
     }
     
-    // Search for Customer by ID
-    public static Customer searchCustomerById(List<Customer> customers, String customerId) {
-        for (Customer customer : customers) {
-            if (customer.getId().equalsIgnoreCase(customerId)) {
+    // Search for Customer by ID (now using User)
+    public static User searchCustomerById(List<User> customers, String customerId) {
+        for (User customer : customers) {
+            if (customer.getId() != null && customer.getId().equalsIgnoreCase(customerId)) {
                 return customer;
             }
         }
@@ -107,6 +107,27 @@ public class SearchAlgorithms {
         for (Order order : orders) {
             if (order.getStatus().equalsIgnoreCase(status)) {
                 result.add(order);
+            }
+        }
+        return result;
+    }
+    
+    // Linear Search for Users by Username
+    public static User linearSearchUsers(List<User> users, String username) {
+        for (User user : users) {
+            if (user.getUsername().equalsIgnoreCase(username)) {
+                return user;
+            }
+        }
+        return null;
+    }
+    
+    // Search for Users by Role
+    public static List<User> searchUsersByRole(List<User> users, String role) {
+        List<User> result = new ArrayList<>();
+        for (User user : users) {
+            if (user.getRole().equalsIgnoreCase(role)) {
+                result.add(user);
             }
         }
         return result;

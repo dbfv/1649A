@@ -1,7 +1,8 @@
 package utils.datastructures;
 
+
 public class Queue<T> {
-    private LinkedList<T> list;
+    private final LinkedList<T> list;
     
     public Queue() {
         this.list = new LinkedList<>();

@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BookController {
-    private BookService bookService;
-    private Scanner scanner;
+    private final BookService bookService;
+    private final Scanner scanner;
     
     public BookController(BookService bookService, Scanner scanner) {
         this.bookService = bookService;
@@ -28,28 +28,16 @@ public class BookController {
             scanner.nextLine(); // consume newline
             
             switch (choice) {
-                case 1:
-                    viewAllBooks();
-                    break;
-                case 2:
-                    searchBooksByTitle();
-                    break;
-                case 3:
-                    searchBooksByAuthor();
-                    break;
-                case 4:
-                    addNewBook();
-                    break;
-                case 5:
-                    updateBookQuantity();
-                    break;
-                case 6:
-                    sortBooksMenu();
-                    break;
-                case 7:
+                case 1 -> viewAllBooks();
+                case 2 -> searchBooksByTitle();
+                case 3 -> searchBooksByAuthor();
+                case 4 -> addNewBook();
+                case 5 -> updateBookQuantity();
+                case 6 -> sortBooksMenu();
+                case 7 -> {
                     return;
-                default:
-                    System.out.println("Invalid option. Please try again.");
+                }
+                default -> System.out.println("Invalid option. Please try again.");
             }
         }
     }
@@ -215,24 +203,23 @@ public class BookController {
         scanner.nextLine(); // consume newline
         
         switch (choice) {
-            case 1:
+            case 1 -> {
                 bookService.sortBooksByTitle();
                 System.out.println("Books sorted by title using Insertion Sort!");
-                break;
-            case 2:
+            }
+            case 2 -> {
                 bookService.sortBooksByAuthor();
                 System.out.println("Books sorted by author using Selection Sort!");
-                break;
-            case 3:
+            }
+            case 3 -> {
                 bookService.sortBooksByPrice();
                 System.out.println("Books sorted by price using Quick Sort!");
-                break;
-            case 4:
+            }
+            case 4 -> {
                 bookService.sortBooksById();
                 System.out.println("Books sorted by ID using Merge Sort!");
-                break;
-            default:
-                System.out.println("Invalid option.");
+            }
+            default -> System.out.println("Invalid option.");
         }
         
         viewAllBooks();

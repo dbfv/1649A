@@ -2,8 +2,8 @@ package order;
 
 import book.Book;
 import book.BookService;
-import customer.Customer;
-import customer.CustomerService;
+import user.User;
+import user.UserService;
 import utils.datastructures.Queue;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +12,14 @@ import java.util.Scanner;
 public class OrderController {
     private OrderService orderService;
     private BookService bookService;
-    private CustomerService customerService;
+    private UserService userService;
     private Scanner scanner;
     
     public OrderController(OrderService orderService, BookService bookService, 
-                          CustomerService customerService, Scanner scanner) {
+                          UserService userService, Scanner scanner) {
         this.orderService = orderService;
         this.bookService = bookService;
-        this.customerService = customerService;
+        this.userService = userService;
         this.scanner = scanner;
     }
     
@@ -42,37 +42,19 @@ public class OrderController {
             scanner.nextLine(); // consume newline
             
             switch (choice) {
-                case 1:
-                    createNewOrder();
-                    break;
-                case 2:
-                    viewAllOrders();
-                    break;
-                case 3:
-                    trackOrderById();
-                    break;
-                case 4:
-                    searchOrdersByCustomerName();
-                    break;
-                case 5:
-                    searchOrdersByStatus();
-                    break;
-                case 6:
-                    processNextOrder();
-                    break;
-                case 7:
-                    completeOrder();
-                    break;
-                case 8:
-                    cancelOrder();
-                    break;
-                case 9:
-                    viewOrderQueue();
-                    break;
-                case 10:
+                case 1 -> createNewOrder();
+                case 2 -> viewAllOrders();
+                case 3 -> trackOrderById();
+                case 4 -> searchOrdersByCustomerName();
+                case 5 -> searchOrdersByStatus();
+                case 6 -> processNextOrder();
+                case 7 -> completeOrder();
+                case 8 -> cancelOrder();
+                case 9 -> viewOrderQueue();
+                case 10 -> {
                     return;
-                default:
-                    System.out.println("Invalid option. Please try again.");
+                }
+                default -> System.out.println("Invalid option. Please try again.");
             }
         }
     }
@@ -84,7 +66,7 @@ public class OrderController {
             return;
         }
         
-        Customer customer = customerService.findCustomerById(customerId);
+        User customer = userService.findCustomerById(customerId);
         if (customer == null) {
             System.out.println("Customer not found! Please add customer first.");
             return;

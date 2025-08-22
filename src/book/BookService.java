@@ -1,12 +1,12 @@
 package book;
 
-import utils.SortingAlgorithms;
-import utils.SearchAlgorithms;
 import java.io.*;
 import java.util.*;
+import utils.SearchAlgorithms;
+import utils.SortingAlgorithms;
 
 public class BookService {
-    private List<Book> books;
+    private final List<Book> books;
     private final String CSV_FILE = "books.csv";
     
     public BookService() {
@@ -25,7 +25,12 @@ public class BookService {
     }
     
     public Book findBookById(String bookId) {
-        return books.stream().filter(b -> b.getId().equals(bookId)).findFirst().orElse(null);
+        for (Book book : books) {
+            if (book.getId().equalsIgnoreCase(bookId)) {
+                return book;
+            }
+        }
+        return null;
     }
     
     public List<Book> findBooksByTitle(String title) {

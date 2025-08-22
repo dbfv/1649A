@@ -2,10 +2,10 @@ package order;
 
 import book.Book;
 import book.BookService;
-import customer.Customer;
-import customer.CustomerService;
 import java.io.*;
 import java.util.*;
+import user.User;
+import user.UserService;
 import utils.SearchAlgorithms;
 import utils.SortingAlgorithms;
 import utils.datastructures.Queue;
@@ -14,21 +14,21 @@ public class OrderService {
     private final List<Order> orders;
     private final Queue<Order> orderQueue;
     private final BookService bookService;
-    private final CustomerService customerService;
+    private final UserService userService;
     private final String CSV_FILE = "orders.csv";
     private int orderCounter;
     
-    public OrderService(BookService bookService, CustomerService customerService) {
+    public OrderService(BookService bookService, UserService userService) {
         this.orders = new ArrayList<>();
         this.orderQueue = new Queue<>();
         this.bookService = bookService;
-        this.customerService = customerService;
+        this.userService = userService;
         this.orderCounter = 1;
         loadOrdersFromCsv();
     }
     
     public String createOrder(String customerId, List<OrderItem> items) {
-        Customer customer = customerService.findCustomerById(customerId);
+        User customer = userService.findCustomerById(customerId);
         if (customer == null) {
             throw new RuntimeException("Customer not found: " + customerId);
         }
@@ -41,7 +41,7 @@ public class OrderService {
         }
         
         // Create order
-        String orderId = "ORD" + String.format("%04d", orderCounter++);
+        String orderId = "ORD" + String.format("%03d", orderCounter++);
         Order order = new Order(orderId, customer);
         
         for (OrderItem item : items) {
@@ -130,7 +130,7 @@ public class OrderService {
                     String status = parts[2];
                     // Parse date and total amount as needed
                     
-                    Customer customer = customerService.findCustomerById(customerId);
+                    User customer = userService.findCustomerById(customerId);
                     if (customer != null) {
                         Order order = new Order(orderId, customer);
                         order.setStatus(status);

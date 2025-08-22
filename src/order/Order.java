@@ -1,6 +1,6 @@
 package order;
 
-import customer.Customer;
+import user.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Order {
     private String orderId;
-    private Customer customer;
+    private User customer;
     private List<OrderItem> items;
     private String status;
     private LocalDateTime orderDate;
@@ -20,7 +20,7 @@ public class Order {
         this.status = "PENDING";
     }
     
-    public Order(String orderId, Customer customer) {
+    public Order(String orderId, User customer) {
         this();
         this.orderId = orderId;
         this.customer = customer;
@@ -30,8 +30,8 @@ public class Order {
     public String getOrderId() { return orderId; }
     public void setOrderId(String orderId) { this.orderId = orderId; }
     
-    public Customer getCustomer() { return customer; }
-    public void setCustomer(Customer customer) { this.customer = customer; }
+    public User getCustomer() { return customer; }
+    public void setCustomer(User customer) { this.customer = customer; }
     
     public List<OrderItem> getItems() { return items; }
     public void setItems(List<OrderItem> items) { this.items = items; }
