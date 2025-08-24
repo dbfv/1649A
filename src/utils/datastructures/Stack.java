@@ -1,7 +1,7 @@
 package utils.datastructures;
 
 public class Stack<T> {
-    private LinkedList<T> list;
+    private final LinkedList<T> list;
     
     public Stack() {
         this.list = new LinkedList<>();
@@ -35,14 +35,14 @@ public class Stack<T> {
     
     // Get size of stack
     public int size() {
-        return list.size();
+        return list.getSize();
     }
-    
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Stack: [");
-        Node<T> current = list.getHead();
+        LinkedList.Node<T> current = list.getHead();
         while (current != null) {
             sb.append(current.getData());
             if (current.getNext() != null) {
