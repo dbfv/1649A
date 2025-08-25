@@ -28,6 +28,10 @@ public class Queue<T> {
     public int getSize() {
         return list.getSize();
     }
+    
+    public int size() {
+        return list.getSize();
+    }
 
     public boolean isEmpty() {
         return list.isEmpty();
